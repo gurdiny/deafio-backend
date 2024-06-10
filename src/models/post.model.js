@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const modelName = "users";
+const modelName = "post";
 
 const schema = new mongoose.Schema(
   {
@@ -9,18 +9,17 @@ const schema = new mongoose.Schema(
       minLength: 2,
       maxLength: 100,
     },
-    profilePic: {
+    image: {
       type: String,
       required: true,
     },
-    email: {
+    body: {
       type: String,
       required: true,
-      match: /[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+/,
     },
-    password: {
-      type: String,
-      required: true,
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users",
     },
     created_ad: {
       type: Date,
@@ -34,3 +33,9 @@ const schema = new mongoose.Schema(
 );
 
 module.exports = mongoose.model(modelName, schema);
+// - title (string)
+// - image (string)
+// - body (string )
+// - user (ObjectId referencia a UserId)
+// - created_at (date)
+// - updated_at (date

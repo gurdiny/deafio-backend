@@ -9,7 +9,7 @@ async function create(userData) {
   }
   userData.password = await encrypt.encrypt(userData.password);
   const newUser = await User.create(userData);
-  return newKoder;
+  return newUser;
 }
 
 async function getAll() {
