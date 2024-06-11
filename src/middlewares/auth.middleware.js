@@ -1,6 +1,6 @@
 const createError = require("http-errors");
 const jwt = require("../lib/jwt");
-const koderUseCase = require("../usecases/koders.usecase");
+const postUseCase = require("../usescases/post.usecase");
 
 async function auth(request, response, next) {
   try {
@@ -11,13 +11,13 @@ async function auth(request, response, next) {
 
     const payload = jwt.verify(token);
 
-    const user = await koderUseCase.getById(payload.id);
+    const user = await postUseCase.getById(payload.id);
     request.user = user;
     next();
   } catch (error) {
     response.status(401);
     response.json({
-      secces: false,
+      success: false,
       error: error.message,
     });
   }

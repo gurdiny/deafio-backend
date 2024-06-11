@@ -1,5 +1,6 @@
 const express = require("express");
 const PostUseCase = require("../usescases/post.usecase");
+const auth = require("../middlewares/auth.middleware");
 const router = express.Router();
 
 router.get("/", async (request, response) => {
@@ -22,7 +23,7 @@ router.get("/", async (request, response) => {
   }
 });
 
-router.post("/", async (request, response) => {
+router.post("/", auth, async (request, response) => {
   try {
     const postCreated = await PostUseCase.create(request.body);
     response.json({
@@ -57,7 +58,7 @@ router.get("/:id", async (request, response) => {
   }
 });
 
-router.delete("/:id", async (request, response) => {
+router.delete("/:id", auth, async (request, response) => {
   try {
     const { id } = request.params;
     const postDelete = await PostUseCase.deleteById(id);
@@ -74,7 +75,7 @@ router.delete("/:id", async (request, response) => {
   }
 });
 
-router.patch("/:id", async (request, response) => {
+router.patch("/:id", auth, async (request, response) => {
   try {
     const { id } = request.params;
     const postUpdated = await PostUseCase.updateById(id, request.body);

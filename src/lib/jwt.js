@@ -5,8 +5,8 @@ function sign(payload) {
   return jsonWebToken.sign(payload, JWT_SECRET, { expiresIn: "1d" });
 }
 
-function verifyFun(token) {
+function verify(token) {
   return jsonWebToken.verify(token, JWT_SECRET);
 }
 
-module.exports = { sign, verifyFun };
+module.exports = { sign, verify };
